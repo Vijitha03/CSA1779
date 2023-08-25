@@ -2,7 +2,7 @@ print("VIJITHA")
 print("192124187")
 from collections import defaultdict
 
-jug1, jug2, aim = 4, 3, 2
+jug1, jug2, aim = 5,3,1
 
 visited = defaultdict(lambda: False)
 
