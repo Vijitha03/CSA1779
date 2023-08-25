@@ -4,7 +4,6 @@ N = int(input())
 
 board = [[0]*N for _ in range(N)]
 def attack(i, j):
-    #checking vertically and horizontally
     for k in range(0,N):
         if board[i][k]==1 or board[k][j]==1:
             return True
@@ -15,7 +14,7 @@ def attack(i, j):
                 if board[k][l]==1:
                     return True
     return False
-    
+
 def N_queens(n):
     if n==0:
         return True
