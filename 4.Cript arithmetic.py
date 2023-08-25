@@ -1,53 +1,31 @@
 print("VIJITHA ,192124187")
-print("CRIPT ARITHMETIC")
-def isSolvable(words, result):
-    mp = [-1]*(26)
-    used = [0]*(10)
-    Hash = [0]*(26)
-    CharAtfront = [0]*(26)
-    uniq = ""
-    for word in range(len(words)):
-        for i in range(len(words[word])):
-            ch = words[word][i]
-            Hash[ord(ch) - ord('A')] += pow(10, len(words[word]) - i - 1)
-            if mp[ord(ch) - ord('A')] == -1:
-                mp[ord(ch) - ord('A')] = 0
-                uniq += str(ch)
-            if i == 0 and len(words[word]) > 1:
-                CharAtfront[ord(ch) - ord('A')] = 1
-    for i in range(len(result)):
-        ch = result[i]
-        Hash[ord(ch) - ord('A')] -= pow(10, len(result) - i - 1)
-        if mp[ord(ch) - ord('A')] == -1:
-            mp[ord(ch) - ord('A')] = 0
-            uniq += str(ch)
-        if i == 0 and len(result) > 1:
-            CharAtfront[ord(ch) - ord('A')] = 1
-    mp = [-1]*(26)
-    return True
-def solve(words, i, S, mp, used, Hash, CharAtfront):
-    # If i is word.length
-    if i == len(words):
-        return S == 0
-    ch = words[i]
-    val = mp[ord(words[i]) - ord('A')]
-    if val != -1:
-        return solve(words, i + 1, S + val * Hash[ord(ch) - ord('A')], mp, used, Hash, CharAtfront)
-    x = False
-    for l in range(10):
-        if CharAtfront[ord(ch) - ord('A')] == 1 and l == 0:
-            continue
-        if used[l] == 1:
-            continue
-        mp[ord(ch) - ord('A')] = l
-        used[l] = 1
-        x |= solve(words, i + 1, S + l * Hash[ord(ch) - ord('A')], mp, used, Hash, CharAtfront)
-        mp[ord(ch) - ord('A')] = -1
-        used[l] = 0
-    return x
-arr = [ "SIX", "SEVEN", "SEVEN" ]
-S = "TWENTY"
-if isSolvable(arr, S):
-    print("Yes")
-else:
-    print("No")
+print("Cript Arithmetic")
+import itertools
+def get_value(word, substitution):
+    s = 0
+    factor = 1
+    for letter in reversed(word):
+        s += factor * substitution[letter]
+        factor *= 10
+    return s
+def solve2(equation):
+    print(equation)
+    left, right = equation.lower().replace(' ', '').split('=')
+    left = left.split('+')
+    letters = set(right)
+    for word in left:
+        for letter in word:
+            letters.add(letter)
+    letters = list(letters)
+
+    digits = range(10)
+    for perm in itertools.permutations(digits, len(letters)):
+        sol = dict(zip(letters, perm))
+
+        if sum(get_value(word, sol) for word in left) == get_value(right, sol):
+            print(' + '.join(str(get_value(word, sol)) for word in left) + " = {} (mapping: {})".format(get_value(right, sol), sol))
+            break
+
+if __name__ == '__main__':
+    solve2('SCOOBY + DOOO =BLINKS ')
+
