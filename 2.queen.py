@@ -1,4 +1,5 @@
 print("VIJITHA,192124187")
+print("Eight queens problem")
 print ("Enter the number of queens")
 N = int(input())
 
