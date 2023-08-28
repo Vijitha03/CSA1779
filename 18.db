@@ -1,0 +1,27 @@
+dob(vijitha, date(2003,08,21)).
+dob(meghana, date(2006,05,07)).
+dob(swarna, date(1993,10,24)).
+dob(bindu, date(1996,07,01)).
+dob(indu, date(1996,11,02)).
+
+name(vijitha, "Vijitha").
+name(meghana, "Meghana").
+name(swarna, "Swarna").
+name(bindu, "Bindu").
+name(indu, "Indu").
+
+name(vijitha, date(2003,08,21)).
+name(meghana, date(2006,05,07)).
+name(swarna, date(1993,10,24)).
+name(bindu, date(1996,07,01)).
+name(indu, date(1996,11,02)).
+
+
+get_dob(Name, DOB) :-
+    dob(Name, DOB).
+
+get_name(Name, NameStr) :-
+    name(Name, NameStr).
+
+get_name_by_dob(DOB, Name) :-
+    dob(Name, DOB).
