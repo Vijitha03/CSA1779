@@ -1,0 +1,43 @@
+student(john).
+student(emma).
+student(liam).
+student(sophia).
+student(noah).
+
+% Teachers
+teacher(ms_smith).
+teacher(mr_jones).
+teacher(mrs_davis).
+teacher(mr_wilson).
+teacher(ms_jackson).
+
+% Subjects and Codes
+subject(math, m101).
+subject(english, e101).
+subject(physics, p201).
+subject(history, h301).
+subject(chemistry, c202).
+
+% Teaching relationships
+teaches(ms_smith, math).
+teaches(mr_jones, english).
+teaches(mrs_davis, physics).
+teaches(mr_wilson, history).
+teaches(ms_jackson, chemistry).
+
+% Student-Teacher-Subject relationships
+student_teacher_subject(john, ms_smith, math).
+student_teacher_subject(emma, mr_jones, english).
+student_teacher_subject(liam, mrs_davis, physics).
+student_teacher_subject(sophia, mr_wilson, history).
+student_teacher_subject(noah, ms_jackson, chemistry).
+
+% Predicate to get student details
+get_student_details(Student, Teacher, Subject, Code) :-
+    student_teacher_subject(Student, TeacherName, Subject),
+    teacher(TeacherName),
+    teaches(TeacherName, Subject),
+    subject(Subject, Code).
+
+% Query to get student details
+?- get_student_details(Student, Teacher, Subject, Code).
