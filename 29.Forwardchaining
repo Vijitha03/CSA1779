@@ -1,0 +1,38 @@
+% Define ancestor relationship
+ancestor(X, Y) :- parent(X, Y).
+ancestor(X, Y) :- parent(X, Z), ancestor(Z, Y).
+
+% Define family relationships with names
+parent(rajan, meera).
+parent(rajan, tarun).
+parent(meera, anjali).
+parent(meera, priya).
+parent(priya, arjun).
+
+% Forward Chaining to generate ancestor relationships
+generate_ancestors :-
+    ancestor(X, Y),
+    assert(ancestor(X, Y)),
+    fail.
+generate_ancestors.
+
+% Queries with names
+query1 :- ancestor(rajan, arjun), write('Yes, Rajan is an ancestor of Arjun.').
+
+query2 :- write('Ancestors of Anjali: '), ancestor(X, anjali), write(X), write(', '), fail.
+
+query3 :- write('Descendants of Meera: '), ancestor(meera, X), write(X), write(', '), fail.
+
+query4 :- ancestor(rajan, priya), write('Yes, Rajan is a descendant of Priya.').
+
+query5 :- write('Descendants of Rajan: '), ancestor(rajan, X), write(X), write(', '), fail.
+
+query6 :- write('Ancestors of Tarun: '), ancestor(X, tarun), write(X), write(', '), fail.
+
+query7 :- parent(anjali, priya), write('No, Anjali is not a parent of Priya.').
+
+query8 :- parent(arjun, meera), write('No, Arjun is not a parent of Meera.').
+
+% Run forward chaining to generate conclusions
+:- generate_ancestors.
+
