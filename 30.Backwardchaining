@@ -1,0 +1,39 @@
+% Define parent relationships with Telugu names
+parent(ravi, lakshmi).
+parent(ravi, sai).
+parent(lakshmi, anita).
+parent(lakshmi, prasad).
+parent(prasad, vamsi).
+
+% Define ancestor relationship recursively
+ancestor(X, Y) :-
+    parent(X, Y).
+ancestor(X, Y) :-
+    parent(X, Z),
+    ancestor(Z, Y).
+
+% Queries with Telugu names
+% Query 1: Is Ravi an ancestor of Vamsi?
+query1 :- ancestor(ravi, vamsi).
+
+% Query 2: Who are the ancestors of Anita?
+query2 :- ancestor(X, anita), write(X), nl.
+
+% Query 3: Are there any descendants of Lakshmi?
+query3 :- ancestor(lakshmi, X), write(X), nl.
+
+% Query 4: Is Prasad a descendant of Ravi?
+query4 :- ancestor(ravi, prasad).
+
+% Query 5: Who are the descendants of Ravi?
+query5 :- ancestor(ravi, X), write(X), nl.
+
+% Query 6: Are there any ancestors of Sai?
+query6 :- ancestor(X, sai), write(X), nl.
+
+% Query 7: Is Lakshmi a parent of Prasad?
+query7 :- parent(lakshmi, prasad).
+
+% Query 8: Is Vamsi a parent of Lakshmi?
+query8 :- parent(vamsi, lakshmi).
+
